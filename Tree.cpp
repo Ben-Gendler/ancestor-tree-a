@@ -19,11 +19,11 @@ Tree::Tree(string name)
 
 static node findByName(node root, string name)
 {
-	if (!root)
-		return NULL;
+    if (!root)
+        return NULL;
 
-  if (root->name == name)
-    return root;
+    if (root->name == name)
+        return root;
 
 	if(root->father)
 		return findByName(root->father,name);
@@ -84,35 +84,38 @@ void Tree::display()
 
 string findDepth(node root, string family_member_name, string pathString)
 {
-	if(!root)
-		return "-1";
-
-	if(root->name == family_member_name)
-			return pathString;
-
-	if(root->father || root->mother)
-	{
-		if(root->father && findByName(root->father, family_member_name))
-		{
-			if(root->father->name == family_member_name)
-				return pathString + "1";
-
-			else
-				return findDepth(root->father,family_member_name,pathString + "1");
-		}
-
-		if(root->mother && findByName(root->mother, family_member_name))
-		{
-			if(root->mother->name == family_member_name)
-				return pathString + "0";
-
-			else
-				return findDepth(root->mother,family_member_name,pathString + "0");
-		}
-
-	}
-	else
-		return "-1";
+	// if(!root && !findByName(root, family_member_name))
+	// 	return "-1";
+	//
+	// if(root->name == family_member_name)
+	// 		return pathString;
+	//
+	// if(root->father || root->mother)
+	// {
+	// 	std::cout << "/* father||mother */" << '\n';
+	//
+	// 	if(root->father && findByName(root->father, family_member_name))
+	// 	{
+	// 		if(root->father->name == family_member_name)
+	// 			return pathString + "1";
+	//
+	// 		else
+	// 			return findDepth(root->father,family_member_name,pathString + "1");
+	// 	}
+	//
+	// 	if(root->mother && findByName(root->mother, family_member_name))
+	// 	{
+	// 		std::cout << "/*  secondmessage */" << '\n';
+	// 		if(root->mother->name == family_member_name)
+	// 			return pathString + "0";
+	//
+	// 		else
+	// 			return findDepth(root->mother,family_member_name,pathString + "0");
+	// 	}
+	//
+	// }
+	// else
+	// 	return "-1";
 }//func
 
 string Tree::relation(string family_member_name) //NOT DONE
