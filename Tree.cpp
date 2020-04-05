@@ -74,40 +74,54 @@ if(root->father)
 void prettyprint(node root) //wrapper func
 {
 	actualprint(root,0);
+
 }
 
 void Tree::display()
 {
 		prettyprint(this->root);
 }
-static string recursiveRelation(node currRoot,string family_member_name,string relationString) //NOT DONE
+
+string findDepth(node root, string family_member_name, string pathString)
 {
-	if (!currRoot)
-		return "unknown relation";
-	if(currRoot->name == family_member_name){
+	if(!root)
+		return "-1";
 
-	}
-
-	if(currRoot->mother)
-	{
-		relationString += "mother";
-		recursiveRelation(currRoot->mother,family_member_name,"relationString");
-	}
-}
-
-static string relationWrapper(node root,string family_member_name) //NOT DONE
-{
 	if(root->name == family_member_name)
-		return "self";
+			return pathString;
 
-	string relationString = "";
-	string relationTypes[] = {"self", "mother","father","grandmother","grandfather","great-","unrelated"};
-															//0        1       2          3            4            5        6
+	if(root->father || root->mother)
+	{
+		if(root->father && findByName(root->father, family_member_name))
+		{
+			if(root->father->name == family_member_name)
+				return pathString + "1";
 
-	return recursiveRelation(root,family_member_name,relationString); //NOT DONE
-}
+			else
+				return findDepth(root->father,family_member_name,pathString + "1");
+		}
+
+		if(root->mother && findByName(root->mother, family_member_name))
+		{
+			if(root->mother->name == family_member_name)
+				return pathString + "0";
+
+			else
+				return findDepth(root->mother,family_member_name,pathString + "0");
+		}
+
+	}
+	else
+		return "-1";
+}//func
 
 string Tree::relation(string family_member_name) //NOT DONE
 {
-	return relationWrapper(this->root,family_member_name);
+	if(this->root->name==family_member_name)
+		return "self";
+
+	string result = findDepth(this->root,family_member_name,"");
+//makeoneRower
+	return result;
+	// return relationWrapper(this->root,family_member_name);
 }
