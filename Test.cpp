@@ -12,8 +12,7 @@
 
 using namespace family;
 
-family::Tree T1("a");
- T1.addFather("a","b");
+    family::Tree T1("a");
 
 
 // T1.addFather("b","c");
@@ -28,9 +27,8 @@ family::Tree T1("a");
 
 TEST_CASE("")
 {
-
-    //
-    // CHECK(T1.relation("b") == string("father"));
+    T1.addFather("a","b");
+    CHECK(T1.relation("b") == string("father"));
     // CHECK(T1.relation("a") == string("self"));
     // CHECK(T1.relation("wooooooooooof") == string("unrelated"));
     // CHECK(T1.relation("") == string("unrelated"));
