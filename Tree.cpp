@@ -56,6 +56,7 @@ void actualprint(node root,int spaceAmount)
         return;
 
 spaceAmount += SPACES;
+
 if(root->mother)
 	actualprint(root->mother, spaceAmount);
 
@@ -82,40 +83,29 @@ void Tree::display()
 		prettyprint(this->root);
 }
 
-string findDepth(node root, string family_member_name, string pathString)
+string findDepth(node root, string family_member_name, string relation)
 {
-	// if(!root && !findByName(root, family_member_name))
-	// 	return "-1";
-	//
-	// if(root->name == family_member_name)
-	// 		return pathString;
-	//
-	// if(root->father || root->mother)
-	// {
-	// 	std::cout << "/* father||mother */" << '\n';
-	//
-	// 	if(root->father && findByName(root->father, family_member_name))
-	// 	{
-	// 		if(root->father->name == family_member_name)
-	// 			return pathString + "1";
-	//
-	// 		else
-	// 			return findDepth(root->father,family_member_name,pathString + "1");
-	// 	}
-	//
-	// 	if(root->mother && findByName(root->mother, family_member_name))
-	// 	{
-	// 		std::cout << "/*  secondmessage */" << '\n';
-	// 		if(root->mother->name == family_member_name)
-	// 			return pathString + "0";
-	//
-	// 		else
-	// 			return findDepth(root->mother,family_member_name,pathString + "0");
-	// 	}
-	//
-	// }
-	// else
-	// 	return "-1";
+	if (!root)
+			return "";
+
+	if (root->name == family_member_name)
+			return relation;
+
+string tempDepth = findDepth(root->father,family_member_name,"father");
+
+	if(tempDepth != "")
+	{
+			return "grand-" + tempDepth;
+	}
+
+tempDepth = findDepth(root->mother,family_member_name,"mother");
+
+	if(tempDepth != "")
+	{
+			return "grand-" + tempDepth;
+	}
+
+return "";
 }//func
 
 string Tree::relation(string family_member_name) //NOT DONE
@@ -123,8 +113,18 @@ string Tree::relation(string family_member_name) //NOT DONE
 	if(this->root->name==family_member_name)
 		return "self";
 
-	string result = findDepth(this->root,family_member_name,"");
-//makeoneRower
+	string result = findDepth(this->root->father,family_member_name,"father");
+	string result1 = findDepth(this->root->mother,family_member_name,"mother");
+
+if(result!="")
 	return result;
+
+if(result1!="")
+	return result1;
+
+return "not related";
+
+//makeoneRower
+	// return result;
 	// return relationWrapper(this->root,family_member_name);
 }
