@@ -95,14 +95,14 @@ string tempDepth = findDepth(root->father,family_member_name,"father");
 
 	if(tempDepth != "")
 	{
-			return "grand-" + tempDepth;
+			return "great-" + tempDepth;
 	}
 
 tempDepth = findDepth(root->mother,family_member_name,"mother");
 
 	if(tempDepth != "")
 	{
-			return "grand-" + tempDepth;
+			return "great-" + tempDepth;
 	}
 
 return "";
@@ -111,18 +111,30 @@ return "";
 string Tree::relation(string family_member_name) //NOT DONE
 {
 	if(this->root->name==family_member_name)
-		return "self";
+		return "me";
 
 	string result = findDepth(this->root->father,family_member_name,"father");
 	string result1 = findDepth(this->root->mother,family_member_name,"mother");
 
 if(result!="")
-	return result;
+{
+		int index = result.rfind("great-");
+		if(index!=-1)
+			result.replace(index,6,"grand");
+}
+		return result;
 
 if(result1!="")
-	return result1;
+{
+		int index1 = result1.rfind("great-");
+		if(index1!=-1)
+			result1.replace(index1,6,"grand");
+}
+		return result1;
 
-return "not related";
+
+
+return "unrelated";
 
 //makeoneRower
 	// return result;
