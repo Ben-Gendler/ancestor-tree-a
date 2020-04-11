@@ -32,6 +32,8 @@ int main() {
 
 	cout << T.find("mother") << endl;  // prints "Rachel"
 	cout << T.find("great-great-grandfather") << endl;  // prints "Avraham"
+	cout << T.find("me") << endl;  // prints "Avraham"
+
 	try {
 		cout << T.find("uncle") << endl;  // throws an exception
 	} catch (const exception& ex) {

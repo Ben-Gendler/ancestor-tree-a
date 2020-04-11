@@ -95,7 +95,7 @@ static string nodeToString(node root)
 	if (!root)
 		return "unrelated";
 
-	if (root->depth == 1)
+	if (root->depth == 0)
 		return "me";
 
 	if (root->depth == 2)
@@ -111,7 +111,7 @@ static string nodeToString(node root)
 		if (root->family_role == FATHER)
 			greatSum = "grandfather";
 
-		for (int i = 0; i < root->depth - 3; i++)
+		for (int i = 0; i <= root->depth - 3; i++)
 			greatSum = "great-" + greatSum;
 
 		return greatSum;
@@ -162,8 +162,22 @@ node findByRole(node root, string family_role)
 	return temp;
 
 }
+static bool validate(string family_role)
+{
+	if(family_role == "uncle")
+		return false;
+
+	return true;
+
+}
 string Tree::find(string family_role)
 {
+	if(!validate(family_role))
+		throw std::invalid_argument( "The tree cannot handle the '" +family_role+"' relation" );
+
+	if(family_role == "me" && root)
+		return this->root->name;
+
 	node result = findByRole(this->root, family_role);
 	if (result)
 		return result->name;
