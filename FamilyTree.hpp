@@ -3,13 +3,13 @@
 //struct: default public
 using namespace std;
 namespace family{
+
   enum gender
   {
     SELF = 0,
     FATHER = 1,
     MOTHER = 2
   };
-
 
   struct tree_node
   {
@@ -23,7 +23,6 @@ tree_node(int depth,gender family_role);
 
 };
 typedef struct tree_node* node;
-
 
     class Tree
     {
