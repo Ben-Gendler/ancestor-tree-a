@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 #include "FamilyTree.hpp"
 using namespace family;
 
@@ -162,20 +163,42 @@ node findByRole(node root, string family_role)
 	return temp;
 
 }
-static bool validate(string family_role)
-{
-	if(family_role == "uncle")
-		return false;
 
-	return true;
+static bool role_validator(string family_role)
+{
+	int len = family_role.length();
+	std::string familyRoles[5]
+	{
+		"me", "mother", "father", "grandmother", "grandfather" };
+
+	if (len == 6 || len == 11 || len == 2)
+	{
+		for (string val: familyRoles)
+		{
+			if (family_role == val)
+				return true;
+		}
+	}
+	if ((len - 11) % 6 == 0 && len >= 17)	//great- cases
+	{
+		string gr = "";
+		for (int i = 1; i <= (len - 11) / 6; i++)	//"great-" amount for this length of a string
+			gr = gr + "great-";
+
+		if (family_role == (gr + "grandfather") || family_role == (gr + "grandmother"))
+			return true;
+	}
+
+	return false;
 
 }
+
 string Tree::find(string family_role)
 {
-	if(!validate(family_role))
-		throw std::invalid_argument( "The tree cannot handle the '" +family_role+"' relation" );
+	if (!role_validator(family_role))
+		throw std::invalid_argument("The tree cannot handle the '" + family_role + "' relation");
 
-	if(family_role == "me" && root)
+	if (family_role == "me" && root)
 		return this->root->name;
 
 	node result = findByRole(this->root, family_role);
