@@ -145,12 +145,14 @@ TEST_CASE("Family A")
     CHECK_THROWS(T3.addMother("Inbal", "Rina"));
 
     CHECK(T3.find("father") == string("Ron"));
-    CHECK(T3.find("grandfather") == string("Aviv") || string("Roni"));
-    CHECK(T3.find("great-grandfather") == string("Haim") || string("Liran") || string("Maor") || string("Gal"));
+    // CHECK((T3.find("grandfather") == string("Aviv")) || (T3.find("grandfather") == string("Roni")));
+    // CHECK((T3.find("great-grandfather") == string("Haim")) || ((T3.find("grandfather") == string("Liran"))
+    // || ((T3.find("grandfather") == string("Maor")) || ((T3.find("grandfather") == string("Gal")));
 
     CHECK(T3.find("mother") == string("Meitar"));
-    CHECK(T3.find("grandmother") == string("Tal") || string("Inbal"));
-    CHECK(T3.find("great-grandmother") == string("Shir") || string("Lina") || string("Nofar") || string("Eden"));
+    // CHECK((T3.find("grandmother") == string("Tal")) || (T3.find("grandmother") == string("Inbal")));
+    // CHECK({T3.find("great-grandmother") == string("Shir")) || (T3.find("grandmother") == string("Lina"))
+    // || (T3.find("grandmother") == string("Nofar")) || (T3.find("grandmother") == string("Eden")));
 
 
     CHECK(T3.find("me") == string("Dolev"));
@@ -176,50 +178,64 @@ TEST_CASE("Family A")
 
 
 }
-//
-// TEST_CASE("Family B")
-// {
-//
-//   T4.addFather("Dolev", "Ron")
-// 	  .addFather("Ron", "Aviv")
-// 	  .addFather("Aviv", "Roni")
-// 	  .addFather("Roni", "Haim")
-// 	  .addFather("Haim", "Shlomi")
-// 	  .addFather("Shlomi", "Tal")
-//
-//     .addMother("Ron", "Meitar")
-//     .addMother("Meitar", "Inbal")
-// 	  .addMother("Inbal", "Eden")
-// 	  .addMother("Eden", "Shir")
-// 	  .addMother("Shir", "Nofar")
-// 	  .addMother("Nofar", "Lior");
-//
-//     CHECK(T4.relation("Ron") == string("father"));
-//     CHECK(T4.relation("Aviv") == string("grandfather"));
-//     CHECK(T4.relation("Roni") == string("great-grandfather"));
-//     CHECK(T4.relation("Haim") == string("great-great-grandfather"));
-//     CHECK(T4.relation("Shlomi") == string("great-great-great-grandfather"));
-//     CHECK(T4.relation("Tal") == string("great-great-great-great-grandfather"));
-//
-//     CHECK(T4.relation("Meitar") == string("grandmother"));
-//     CHECK(T4.relation("Inbal") == string("great-grandmother"));
-//     CHECK(T4.relation("Eden") == string("great-grandmother"));
-//     CHECK(T4.relation("Shir") == string("great-great-great-grandmother"));
-//     CHECK(T4.relation("Nofar") == string("great-great-great-great-grandmother"));
-//     CHECK(T4.relation("Lior") == string("great-great-great-great-great-grandmother"));
-//
-//     CHECK(T4.find("father") == string("Ron"));
-//     CHECK(T4.find("grandfather") == string("Aviv"));
-//     CHECK(T4.find("great-grandfather") == string("Roni"));
-//     CHECK(T4.find("great-great-grandfather") == string("Haim"));
-//     CHECK(T4.find("great-great-great-grandfather") == string("Shlomi"));
-//     CHECK(T4.find("great-great-great-great-grandfather") == string("Tal"));
-//
-//     CHECK(T4.find("grandmother") == string("Meitar"));
-//     CHECK(T4.find("great-grandmother") == string("Inbal"));
-//     CHECK(T4.find("great-great-grandmother") == string("Eden"));
-//     CHECK(T4.find("great-great-great-grandmother") == string("Shir"));
-//     CHECK(T4.find("great-great-great-great-grandmother") == string("Nofar"));
-//     CHECK(T4.find("great-great-great-great-great-grandmother") == string("Lior"));
-//
-// }
+
+TEST_CASE("Family B")
+{
+
+  T4.addFather("Dolev", "Ron")
+	  .addFather("Ron", "Aviv")
+	  .addFather("Aviv", "Roni")
+	  .addFather("Roni", "Haim")
+	  .addFather("Haim", "Shlomi")
+	  .addFather("Shlomi", "Tal")
+
+    .addMother("Ron", "Meitar")
+    .addMother("Meitar", "Inbal")
+	  .addMother("Inbal", "Eden")
+	  .addMother("Eden", "Shir")
+	  .addMother("Shir", "Nofar")
+	  .addMother("Nofar", "Lior");
+
+    CHECK(T4.relation("Ron") == string("father"));
+    CHECK(T4.relation("Aviv") == string("grandfather"));
+    CHECK(T4.relation("Roni") == string("great-grandfather"));
+    CHECK(T4.relation("Haim") == string("great-great-grandfather"));
+    CHECK(T4.relation("Shlomi") == string("great-great-great-grandfather"));
+    CHECK(T4.relation("Tal") == string("great-great-great-great-grandfather"));
+
+    CHECK(T4.relation("Meitar") == string("grandmother"));
+    CHECK(T4.relation("Inbal") == string("great-grandmother"));
+    CHECK(T4.relation("Eden") == string("great-grandmother"));
+    CHECK(T4.relation("Shir") == string("great-great-great-grandmother"));
+    CHECK(T4.relation("Nofar") == string("great-great-great-great-grandmother"));
+    CHECK(T4.relation("Lior") == string("great-great-great-great-great-grandmother"));
+
+    CHECK(T4.find("father") == string("Ron"));
+    CHECK(T4.find("grandfather") == string("Aviv"));
+    CHECK(T4.find("great-grandfather") == string("Roni"));
+    CHECK(T4.find("great-great-grandfather") == string("Haim"));
+    CHECK(T4.find("great-great-great-grandfather") == string("Shlomi"));
+    CHECK(T4.find("great-great-great-great-grandfather") == string("Tal"));
+
+    CHECK(T4.find("grandmother") == string("Meitar"));
+    CHECK(T4.find("great-grandmother") == string("Inbal"));
+    CHECK(T4.find("great-great-grandmother") == string("Eden"));
+    CHECK(T4.find("great-great-great-grandmother") == string("Shir"));
+    CHECK(T4.find("great-great-great-great-grandmother") == string("Nofar"));
+    CHECK(T4.find("great-great-great-great-great-grandmother") == string("Lior"));
+
+    T3.remove("Aviv");
+    CHECK(T3.relation("Meitar") != string("unrelated"));
+    CHECK(T3.relation("Lior") != string("unrelated"));
+    CHECK(T3.relation("Nofar") != string("unrelated"));
+    CHECK(T3.relation("Roni") == string("unrelated"));
+    CHECK(T3.relation("Aviv") == string("unrelated"));
+
+    T3.remove("Ron");
+    CHECK(T3.relation("Meitar") == string("unrelated"));
+    CHECK(T3.relation("Lior") == string("unrelated"));
+    CHECK(T3.relation("Nofar") == string("unrelated"));
+    CHECK(T3.relation("Tal") == string("unrelated"));
+    CHECK(T3.relation("Shlomi") == string("unrelated"));
+    CHECK(T3.relation("Haim") == string("unrelated"));
+}
