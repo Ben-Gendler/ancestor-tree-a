@@ -112,13 +112,13 @@ static string nodeToString(node root)
 		if (root->family_role == FATHER)
 			greatSum = "grandfather";
 
-		for (int i = 0; i <= root->depth - 3; i++)
+		for (int i = 0; i <= root->depth - 4; i++)
 			greatSum = "great-" + greatSum;
 
 		return greatSum;
 	}
 }
-string Tree::relation(string family_member_name)	//NOT DONE
+string Tree::relation(string family_member_name)
 {
 	node temp = findRelation(this->root, family_member_name);
 
@@ -160,7 +160,8 @@ node findByRole(node root, string family_role)
 		return temp;
 
 	temp = findByRole(root->mother, family_role);
-	return temp;
+
+		return temp;
 
 }
 
@@ -202,8 +203,9 @@ string Tree::find(string family_role)
 		return this->root->name;
 
 	node result = findByRole(this->root, family_role);
+
 	if (result)
-		return result->name;
+			return result->name;
 
 	return "unrelated";
 }
