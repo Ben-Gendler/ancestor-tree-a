@@ -40,17 +40,26 @@ static node findByName(node root, string name)
 
 Tree Tree::addFather(string child, string father_name)
 {
-	node CurrRoot = findByName(this->root, child);
-	CurrRoot->father = GetNewNode(father_name, CurrRoot->depth, FATHER);
 
+	node CurrRoot = findByName(this->root, child);
+	if(CurrRoot->father != nullptr){
+        throw "Father is already exist.\n";
+	}
+	else {
+        CurrRoot->father = GetNewNode(father_name, CurrRoot->depth, FATHER);
+    }
 	return * this;
 }
 
 Tree Tree::addMother(string child, string mother_name)
 {
 	node CurrRoot = findByName(this->root, child);
-	CurrRoot->mother = GetNewNode(mother_name, CurrRoot->depth, MOTHER);
-
+    if(CurrRoot->mother != nullptr){
+        throw "Mother is already exist.\n";
+    }
+    else {
+        CurrRoot->mother = GetNewNode(mother_name, CurrRoot->depth, MOTHER);
+    }
 	return * this;
 }
 
@@ -143,7 +152,12 @@ static void deleteSubTree(node CurrRoot)
 
 void Tree::remove(string removeAbove)
 {
-	deleteSubTree(findByName(this->root, removeAbove));
+    if(findByName(this->root, removeAbove) == NULL){
+        throw invalid_argument(removeAbove + " wasn't found");
+    }
+    else{
+        deleteSubTree(findByName(this->root, removeAbove));
+    }
 }
 
 node findByRole(node root, string family_role)
